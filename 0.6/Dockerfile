@@ -42,7 +42,13 @@ RUN apk add --no-cache ca-certificates gnupg openssl && \
 RUN mkdir -p /consul/data && \
     mkdir -p /consul/config && \
     chown -R consul:consul /consul
-
+    mkdir -p /consul/ui
+ 
+ADD https://releases.hashicorp.com/consul/${CONSUL_VERSION}/consul_${CONSUL_VERSION}_web_ui.zip /tmp
+RUN unzip /tmp/consul_${CONSUL_VERSION}_web_ui.zip -d /consul/ui && \
+    rm /tmp/consul_${CONSUL_VERSION}_web_ui.zip
+ 
+RUN chown -R consul:consul /consul
 # Expose the consul data directory as a volume since there's mutable state in there.
 VOLUME /consul/data
 
