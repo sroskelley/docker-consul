@@ -41,7 +41,7 @@ RUN apk add --no-cache ca-certificates gnupg openssl && \
 # config files in that location.
 RUN mkdir -p /consul/data && \
     mkdir -p /consul/config && \
-    chown -R consul:consul /consul
+    chown -R consul:consul /consul && \
     mkdir -p /consul/ui
  
 ADD https://releases.hashicorp.com/consul/${CONSUL_VERSION}/consul_${CONSUL_VERSION}_web_ui.zip /tmp
